@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-_i2bzd!#p4lw87(9qr@mh&r#eso)kez#5vt5&=4x(!%)7f3zj6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["‘https://closest-distance.herokuapp.com","localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["closest-distance.herokuapp.com","localhost", "127.0.0.1"]
 
 
 # Application definition
