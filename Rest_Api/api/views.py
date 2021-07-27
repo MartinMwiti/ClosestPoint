@@ -8,7 +8,7 @@ from . serializers import PointsSerializer
 from . closestDistance import getClosestDistance
 
 
-class employeeList(APIView):
+class closestDistanceValue(APIView):
 
     def get(self, request): 
         points = Points.objects.all()
