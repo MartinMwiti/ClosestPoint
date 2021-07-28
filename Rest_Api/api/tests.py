@@ -1,10 +1,11 @@
-from django.urls import reverse
-from rest_framework import status
-from rest_framework.test import APITestCase
-from . models import Points
+from rest_framework.test import APIClient
 
-class AccountTests(APITestCase):
-    def test_create_account(self):
+class TestPointsApi(unittest.TestCase):
+
+    def setUp(self):
+        self.client = APIClient()
+
+    def test_calculate_point(self):
         url = reverse('/api/getClosestPath/')
         data = {
                     "string_points": "(2,3), (12, 30), (40, 50), (5, 1), (12, 10), (3, 4)"
