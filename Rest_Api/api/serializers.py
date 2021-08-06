@@ -6,3 +6,4 @@ class PointsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Points
         fields = '__all__'
+
