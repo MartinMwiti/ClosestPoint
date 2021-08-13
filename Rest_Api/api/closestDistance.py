@@ -4,34 +4,12 @@
 import math 
 import copy 
 from ast import literal_eval
-# A class to represent a Point in 2D plane 
-class Point(): 
-	def __init__(self, x, y): 
-		self.x = x 
-		self.y = y 
+
+
+
 
 # A utility function to find the 
-# distance between two points 
-def dist(p1, p2): 
-	return math.sqrt((p1.x - p2.x) *
-					(p1.x - p2.x) +
-					(p1.y - p2.y) *
-					(p1.y - p2.y)) 
-
-# A Brute Force method to return the 
-# smallest distance between two points 
-# in P[] of size n 
-def bruteForce(P, n): 
-	min_val = float('inf') 
-	for i in range(n): 
-		for j in range(i + 1, n): 
-			if dist(P[i], P[j]) < min_val: 
-				min_val = dist(P[i], P[j]) 
-
-	return min_val 
-
-# A utility function to find the 
-# distance beween the closest points of 
+# distance between the closest points of 
 # strip of given size. All points in 
 # strip[] are sorted accordint to 
 # y coordinate. They all have an upper 
@@ -59,6 +37,46 @@ def stripClosest(strip, size, d):
 
 	return min_val 
 
+
+# A class to represent a Point in 2D plane 
+class Point(): 
+	def __init__(self, x, y): 
+		self.x = x 
+		self.y = y 
+  
+  
+# Driver code 
+# P = [Point(2, 3), Point(12, 30), 
+# 	Point(40, 50), Point(5, 1), 
+# 	Point(12, 10), Point(3, 4)] 
+# n = len(P) 
+
+# print("The smallest distance is", 
+# 				closest(P, n)) # 1.4142135623730951
+
+def getClosestDistance(s):
+    P = [Point(*x) for x in literal_eval(s)]
+    n = len(P) 
+    return closest(P, n)
+
+# s = "(2,3), (12, 30), (40, 50), (5, 1), (12, 10), (3, 4)"
+# print(getClosestDistance(s))
+
+
+# The main function that finds 
+# the smallest distance. 
+# This method mainly uses closestUtil() 
+def closest(P, n): 
+	P.sort(key = lambda point: point.x) # object sorted by x coordinate
+	Q = copy.deepcopy(P) # to avoid override 
+	Q.sort(key = lambda point: point.y)	# object sorted by y coordinate
+
+	# Use recursive function closestUtil() 
+	# to find the smallest distance 
+	return closestUtil(P, Q, n) 
+
+
+
 # A recursive function to find the 
 # smallest distance. The array P contains 
 # all points sorted according to x coordinate 
@@ -67,7 +85,7 @@ def closestUtil(P, Q, n):
 	# If there are 2 or 3 points, 
 	# then use brute force 
 	if n <= 3: 
-		return bruteForce(P, n) 
+		return bruteForce(P, n) # pythagoras theorem
 
 	# Find the middle point 
 	mid = n // 2
@@ -96,31 +114,23 @@ def closestUtil(P, Q, n):
 	# distance is strip[] 
 	return min(d, stripClosest(strip, len(strip), d)) 
 
-# The main function that finds 
-# the smallest distance. 
-# This method mainly uses closestUtil() 
-def closest(P, n): 
-	P.sort(key = lambda point: point.x) 
-	Q = copy.deepcopy(P) 
-	Q.sort(key = lambda point: point.y)	 
 
-	# Use recursive function closestUtil() 
-	# to find the smallest distance 
-	return closestUtil(P, Q, n) 
+# A utility function to find the 
+# distance between two points 
+def dist(p1, p2): 
+	return math.sqrt((p1.x - p2.x) *
+					(p1.x - p2.x) +
+					(p1.y - p2.y) *
+					(p1.y - p2.y)) 
 
-# Driver code 
-# P = [Point(2, 3), Point(12, 30), 
-# 	Point(40, 50), Point(5, 1), 
-# 	Point(12, 10), Point(3, 4)] 
-# n = len(P) 
+# A Brute Force method to return the 
+# smallest distance between two points 
+# in P[] of size n 
+def bruteForce(P, n): 
+	min_val = float('inf') 
+	for i in range(n): 
+		for j in range(i + 1, n): # next value
+			if dist(P[i], P[j]) < min_val: 
+				min_val = dist(P[i], P[j]) 
 
-# print("The smallest distance is", 
-# 				closest(P, n)) # 1.4142135623730951
-
-def getClosestDistance(s):
-    P = [Point(*x) for x in literal_eval(s)]
-    n = len(P) 
-    return closest(P, n)
-
-# s = "(2,3), (12, 30), (40, 50), (5, 1), (12, 10), (3, 4)"
-# print(getClosestDistance(s))
+	return min_val 

@@ -24,7 +24,7 @@ class closestDistanceValue(APIView):
             # convert input into a string. Datatype for point in the model is of Charfield
             s = str(points['string_points'])
             # print('The value of s is:', s)
-            closestPoint = getClosestDistance(s)  # calculate closest distance
+            closestPoint = getClosestDistance(s) # calculate closest distance
             # print("closestPoint value is:", closestPoint)
             data = {
                 'point': s,
@@ -38,6 +38,8 @@ class closestDistanceValue(APIView):
                 serializer.save()  # save to db
                 # Return closest distance value in a JSON format and status 200
                 return Response(serializer.data, status=status.HTTP_200_OK)
-        except:
+            else:
+                    return "Problem with your values"
+        except  BaseException(e):
             # Return status 400 if the input is not a valid entry
             return Response(status=status.HTTP_400_BAD_REQUEST)
